@@ -2,6 +2,11 @@
 
 Batch de geração de extrato de operações de crédito em linha sequencial (132 colunas), com log em arquivo separado. O desenho original é para **IBM z/OS** (VisualAge COBOL / IBM COBOL for MVS), **DB2** e job **JCL** (`EXTCRDJ.jcl`).
 
+## Tecnologias
+
+- **Mainframe / produção:** COBOL (IBM COBOL / VisualAge), IBM z/OS, DB2 e JCL. O repositório inclui o DDL SQL do DB2 em `TB_CREDITO_DDL.sql`.
+- **Desenvolvimento / testes locais:** GnuCOBOL, shell/Bash, AWK, Make (`Makefile`) e ficheiros `.dat` para os dados do mock. PostgreSQL e Docker não são requisitos nem são usados no fluxo local documentado.
+
 ## Programas
 
 | Fonte | Função |
