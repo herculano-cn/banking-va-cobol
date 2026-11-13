@@ -30,6 +30,24 @@ Requisito: [GnuCOBOL](https://gnu.org/software/gnucobol/) (`cobc` no PATH). No m
 
 O programa `PGMLECRD.cbl` **não** compila no GnuCOBOL sem pré-processamento DB2/SQL; para rodar o fluxo completo em máquina local usa-se **`PGMLECRD_mock.cbl`** no lugar do módulo real. Esse módulo inclui no build o ficheiro **`mock-generated.inc`**: é gerado por **`scripts/gen-mock-from-dat.awk`** a partir de **`mock-operacoes.dat`** (uma operação por linha, campos separados por `|`). **Não é necessário subir PostgreSQL nem Docker** para desenvolvimento local: o `.dat` é o “cadastro” que alimenta o batch; basta editar o ficheiro (ou usar o CLI) e correr `make`. Se não existir `mock-operacoes.dat`, o `make` gera um include vazio e o programa usa a tabela padrão do parágrafo `1010-INIT-TABELA-PADRAO`.
 
+### Uso opcional com Docker
+
+Docker é uma alternativa ao fluxo nativo acima; não inicia DB2, PostgreSQL nem qualquer serviço, e executa apenas o batch local com `PGMLECRD_mock.cbl`. Na raiz do repositório:
+
+```bash
+docker build -t banking-va-cobol .
+docker run --rm -it --user "$(id -u):$(id -g)" -v "$PWD:/app" banking-va-cobol
+```
+
+O segundo comando abre o CLI interativo. Para invocar comandos diretamente (por exemplo, listar e gerar):
+
+```bash
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/app" banking-va-cobol listar
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/app" banking-va-cobol gerar
+```
+
+O bind mount da raiz permite ao CLI ler/alterar `mock-operacoes.dat` e deixa `mock-generated.inc`, `bin/`, `SAIDA` e `LOGFILE` acessíveis no host. O contexto de build exclui os dados locais e as saídas geradas, para não os incorporar à imagem. Sem o bind mount, alterações e saídas ficam no filesystem efémero do container; o `--user` evita criar ficheiros pertencentes a `root` no host.
+
 ### Operações locais: registar → listar → gerar extrato
 
 O programa COBOL **não** pede dados em ecrã: ele usa a lista já compilada a partir de **`mock-operacoes.dat`**. O fluxo é:

@@ -1,0 +1,9 @@
+.git
+bin/
+SAIDA
+LOGFILE
+mock-operacoes.dat
+mock-generated.inc
+*.so
+*.dylib
+.DS_Store
