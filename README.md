@@ -121,7 +121,7 @@ Se `WS-PARM` vier vazio (como em execução direta sem JCL), o programa usa **da
 
 ## Testes e verificação local
 
-Atualmente, o repositório não define uma suíte automatizada nem um alvo `test`; portanto, **`make test` não está disponível**. Como verificação manual (smoke) do fluxo de execução, use **`make run-show`** (requer GnuCOBOL instalado, com `cobc` no `PATH`): o comando executa o batch e exibe `SAIDA` + `LOGFILE`. Executar o batch não equivale a uma suíte automatizada de assertions.
+O Makefile atual não possui alvo `test`, e o repositório não define uma suíte automatizada; portanto, **`make test` não está disponível**. Como verificação manual (smoke) do fluxo de execução, use **`make run-show`** (requer GnuCOBOL instalado, com `cobc` no `PATH`): o comando executa o batch e exibe `SAIDA` + `LOGFILE`. Executar o batch não equivale a uma suíte automatizada de assertions.
 
 ## Conteúdo do repositório
 
