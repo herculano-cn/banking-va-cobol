@@ -1,5 +1,7 @@
 # Extrato de operações de crédito (COBOL)
 
+For the Java 21 Quarkus migration, see [extrato-java/README.md](extrato-java/README.md). The Java report intentionally corrects legacy defects and uses English labels; it is not byte-compatible with the legacy report or historical golden.
+
 Batch de geração de extrato de operações de crédito em linha sequencial (132 colunas), com log em arquivo separado. O desenho original é para **IBM z/OS** (VisualAge COBOL / IBM COBOL for MVS), **DB2** e job **JCL** (`EXTCRDJ.jcl`).
 
 ## Programas
